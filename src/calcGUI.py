@@ -33,11 +33,11 @@ expression = ""
 # 'StringVar()' :It is used to get the instance of input field
 textBox = StringVar()
  
-# Let us creating a frame for the input field
+#frame for the input field
 textFrame = Frame(app, width=312, height=50, bd=0, highlightbackground="black", highlightcolor="black", highlightthickness=2)
 textFrame.pack(side=TOP)
  
-#Let us create a input field inside the 'Frame'
+#input field inside the 'Frame'
 textField = Entry(textFrame, font=('arial', 18, 'bold'), textvariable=textBox, width=50, bg="#eee", bd=0, justify=RIGHT)
 textField.grid(row=0, column=0)
 textField.pack(ipady=10) # 'ipady' is internal padding to increase the height of input field
