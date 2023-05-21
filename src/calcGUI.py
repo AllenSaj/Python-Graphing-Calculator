@@ -1,8 +1,8 @@
 from tkinter import *
-from calcGraph import graph
+import calcGraph
 
 app = Tk() 
-app.geometry("340x370") 
+app.geometry("340x440") 
 app.resizable(0, 0) 
 app.title("Calculator")
 
@@ -25,8 +25,25 @@ def buttonEqual():
 def buttonGraph():
     global expression
     textBox.set("")
-    graph(expression)
     expression = ""
+    calcGraph.calcPoints(expression)
+    
+
+def buttonSumToInf():
+    global expression
+    textBox.set("")
+    expression = ""
+    calcGraph.calcSumToInf(expression)
+    
+
+def buttonBackspace():
+    global expression
+    if len(expression) > 0:
+        if (expression[-1] == " "):
+            expression = expression[:-3]
+        else:
+            expression = expression[:-1]
+    textBox.set(expression)
 
 expression = ""
  
@@ -44,7 +61,8 @@ textField.pack(ipady=10) # 'ipady' is internal padding to increase the height of
 buttonFrame = Frame(app, width=312, height=272.5, bg="grey")
 buttonFrame.pack()
  
-clear = Button(buttonFrame, text = "C", fg = "black", width = 32, height = 3, bd = 0, bg = "#eee", cursor = "hand2", command = lambda: buttonClear()).grid(row = 0, column = 0, columnspan = 3, padx = 1, pady = 1)
+clear = Button(buttonFrame, text = "C", fg = "black", width = 21, height = 3, bd = 0, bg = "#eee", cursor = "hand2", command = lambda: buttonClear()).grid(row = 0, column = 0, columnspan = 2, padx = 1, pady = 1)
+backspace = Button(buttonFrame, text = "<-", fg = "black", width = 10, height = 3, bd = 0, bg = "#eee", cursor = "hand2", command = lambda: buttonBackspace()).grid(row = 0, column = 2,  padx = 1, pady = 1)
 divide = Button(buttonFrame, text = "/", fg = "black", width = 10, height = 3, bd = 0, bg = "#eee", cursor = "hand2", command = lambda: buttonClick("/")).grid(row = 0, column = 3, padx = 1, pady = 1)
 
 seven = Button(buttonFrame, text = "7", fg = "black", width = 10, height = 3, bd = 0, bg = "#fff", cursor = "hand2", command = lambda: buttonClick(7)).grid(row = 1, column = 0, padx = 1, pady = 1)
@@ -64,12 +82,14 @@ plus = Button(buttonFrame, text = "+", fg = "black", width = 10, height = 3, bd 
  
 zero = Button(buttonFrame, text = "0", fg = "black", width = 21, height = 3, bd = 0, bg = "#fff", cursor = "hand2", command = lambda: buttonClick(0)).grid(row = 4, column = 0, columnspan = 2, padx = 1, pady = 1)
 point = Button(buttonFrame, text = ".", fg = "black", width = 10, height = 3, bd = 0, bg = "#eee", cursor = "hand2", command = lambda: buttonClick(".")).grid(row = 4, column = 2, padx = 1, pady = 1)
-equals = Button(buttonFrame, text = "=", fg = "black", width = 10, height = 3, bd = 0, bg = "#eee", cursor = "hand2", command = lambda: buttonClick(" = ")).grid(row = 4, column = 3, padx = 1, pady = 1)
+equals = Button(buttonFrame, text = "=", fg = "black", width = 10, height = 3, bd = 0, bg = "#eee", cursor = "hand2", command = lambda: buttonEqual()).grid(row = 4, column = 3, padx = 1, pady = 1)
 
 x = Button(buttonFrame, text = "x", fg = "black", width = 10, height = 3, bd = 0, bg = "#eee", cursor = "hand2", command = lambda: buttonClick("x")).grid(row = 5, column = 0, padx = 1, pady = 1)
 y = Button(buttonFrame, text = "y", fg = "black", width = 10, height = 3, bd = 0, bg = "#eee", cursor = "hand2", command = lambda: buttonClick("y")).grid(row = 5, column = 1, padx = 1, pady = 1)
 power = Button(buttonFrame, text = "^", fg = "black", width = 10, height = 3, bd = 0, bg = "#eee", cursor = "hand2", command = lambda: buttonClick("**")).grid(row = 5, column = 2, padx = 1, pady = 1)
-Graph = Button(buttonFrame, text = "Graph", fg = "red", width = 10, height = 3, bd = 0, bg = "#eed", cursor = "hand2", command = lambda: buttonGraph()).grid(row = 5, column = 3, padx = 1, pady = 1)
+graph = Button(buttonFrame, text = "Graph", fg = "red", width = 10, height = 3, bd = 0, bg = "#eed", cursor = "hand2", command = lambda: buttonGraph()).grid(row = 5, column = 3, padx = 1, pady = 1)
+
+sumToInf = Button(buttonFrame, text = "Sum to inf", fg = "red", width = 10, height = 3, bd = 0, bg = "#eed", cursor = "hand2", command = lambda: buttonSumToInf()).grid(row = 6, column = 0, padx = 1, pady = 1)
 
 app.mainloop()
 

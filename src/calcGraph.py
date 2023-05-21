@@ -1,29 +1,38 @@
 import matplotlib.pyplot as plt
 import pandas as pd
 
-def calcSumToInf(n):
-    total = 0
-    for i in range(n):
-        t = FX(i+1)
-        total += t
-    return total
+def calcSumToInf(exp):
+    fx = lambda func: eval(exp)
+    x,y = [],[]
+    tot = 0
 
-def graph(exp):
+    for i in range(1,100):
+        for j in range(1,i):
+            tot = fx(j)
+        x.append(i)
+        y.append(tot)
+    
+    drawGraph(x,y,exp)
+
+def calcPoints(exp):
     x, y = [], []
-    n = 100
-    fx = lambda x: eval(exp)
+    fx = lambda func: eval(exp)
 
-    for i in range (-n,n,1):
+    for i in range (-100,100,1):
         x.append(i)
         y.append(fx(i))
+    
+    drawGraph(x,y,exp)
 
+def drawGraph(x,y,exp):
     df = pd.DataFrame({
         'x_axis': x,
         'y_axis': y
     })
-
+    
+    #graph settings
     plt.ylim(min(y), max(y)*1.1)
-    plt.xlim(-n, n)
+    plt.xlim(min(x), max(x))
     plt.title("y = "+exp)
     plt.ylabel(exp)
     plt.xlabel("x")
