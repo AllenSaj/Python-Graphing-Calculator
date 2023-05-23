@@ -19,21 +19,22 @@ def buttonClear():
 def buttonEqual():
     global expression
     result = str(eval(expression)) # 'eval':This function is used to evaluates the string expression directly
+    expression = result
     textBox.set(result)
-    expression = ""
+    
 
 def buttonGraph():
     global expression
+    calcGraph.calcPoints(expression)
     textBox.set("")
     expression = ""
-    calcGraph.calcPoints(expression)
     
 
 def buttonSumToInf():
     global expression
+    calcGraph.calcSumToInf(expression)
     textBox.set("")
     expression = ""
-    calcGraph.calcSumToInf(expression)
     
 
 def buttonBackspace():

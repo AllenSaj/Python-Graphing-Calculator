@@ -2,7 +2,8 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 def calcSumToInf(exp):
-    fx = lambda func: eval(exp)
+    FX = eval(exp)
+    fx = lambda x: FX
     x,y = [],[]
     tot = 0
 
@@ -16,12 +17,14 @@ def calcSumToInf(exp):
 
 def calcPoints(exp):
     x, y = [], []
-    fx = lambda func: eval(exp)
+    FX = eval(exp)
+    fx = lambda x: FX
 
     for i in range (-100,100,1):
         x.append(i)
         y.append(fx(i))
     
+    print(x,y)
     drawGraph(x,y,exp)
 
 def drawGraph(x,y,exp):
@@ -31,7 +34,7 @@ def drawGraph(x,y,exp):
     })
     
     #graph settings
-    plt.ylim(min(y), max(y)*1.1)
+    plt.ylim(-100, 100)
     plt.xlim(min(x), max(x))
     plt.title("y = "+exp)
     plt.ylabel(exp)
